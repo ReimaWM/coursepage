@@ -1,6 +1,4 @@
-name: Release DevOps with Heroku # Name of the workflow
-
-# On a push to the branch named master
+name: Release DevOps with Heroku
 
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -16,6 +14,6 @@ jobs:
       - name: Login to Heroku Container registry
         run: heroku container:login
       - name: Build and push
-        run: heroku container:push -a reimapipeline web
+        run: heroku container:push -a ${{ secrets.HEROKU_APP }} web
       - name: Release
-        run: heroku container:release -a reimapipeline web
+        run: heroku container:release -a ${{ secrets.HEROKU_APP }} web
